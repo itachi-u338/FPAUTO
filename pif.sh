@@ -80,16 +80,16 @@ EOF
 item "Dumping values to minimal pif2.json ...";
 cat <<EOF | tee pif2.json;
 {
-   "MANUFACTURER": "Google",
-   "MODEL": "$MODEL",
-   "FINGERPRINT": "$FINGERPRINT",
-   "BRAND": "$(echo "$FINGERPRINT" | cut -d '/' -f 1)",
-   "PRODUCT": "$PRODUCT",
-   "DEVICE": "$DEVICE",
-   "VERSION.RELEASE": "$(echo "$FINGERPRINT" | cut -d ':' -f 2 | cut -d '/' -f 1)",
-   "ID": "$(echo "$FINGERPRINT" | cut -d '/' -f 4)",
-   "VERSION.SECURITY_PATCH": "$SECURITY_PATCH",
-   "VERSION.DEVICE_INITIAL_SDK_INT": "32"
+    "MANUFACTURER": "Google",
+    "MODEL": "$MODEL",
+    "FINGERPRINT": "$FINGERPRINT",
+    "BRAND": "$(echo "$FINGERPRINT" | cut -d '/' -f 1)",
+    "PRODUCT": "$PRODUCT",
+    "DEVICE": "$DEVICE",
+    "VERSION.RELEASE": "$(echo "$FINGERPRINT" | cut -d ':' -f 2 | cut -d '/' -f 1)",
+    "ID": "$(echo "$FINGERPRINT" | cut -d '/' -f 4)",
+    "VERSION.SECURITY_PATCH": "$SECURITY_PATCH",
+    "VERSION.DEVICE_INITIAL_SDK_INT": "32"
 }
 EOF
 
