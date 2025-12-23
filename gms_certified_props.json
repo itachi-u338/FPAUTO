@@ -2,8 +2,11 @@
   "MANUFACTURER": "Google",
   "MODEL": "Pixel 6a",
   "FINGERPRINT": "google/bluejay_beta/bluejay:16/CP11.251114.006/14560987:user/release-keys",
+  "BRAND": "google",
   "PRODUCT": "bluejay_beta",
   "DEVICE": "bluejay",
-  "SECURITY_PATCH": "2025-12-05",
-  "DEVICE_INITIAL_SDK_INT": "32"
+  "VERSION.RELEASE": "16",
+  "ID": "CP11.251114.006",
+  "VERSION.SECURITY_PATCH": "2025-12-05",
+  "VERSION.DEVICE_INITIAL_SDK_INT": "32"
 }
