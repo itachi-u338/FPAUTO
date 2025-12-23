@@ -77,12 +77,31 @@ cat <<EOF | tee pif.json;
 }
 EOF
 
+item "Dumping values to minimal pif2.json ...";
+cat <<EOF | tee pif2.json;
+{
+  "MANUFACTURER": "Google",
+  "MODEL": "$MODEL",
+  "FINGERPRINT": "$FINGERPRINT",
+  "BRAND": "$(echo "$FINGERPRINT" | cut -d '/' -f 1)",
+  "PRODUCT": "$PRODUCT",
+  "DEVICE": "$DEVICE",
+  "VERSION.RELEASE": "$(echo "$FINGERPRINT" | cut -d ':' -f 2 | cut -d '/' -f 1)",
+  "ID": "$(echo "$FINGERPRINT" | cut -d '/' -f 4)",
+  "VERSION.SECURITY_PATCH": "$SECURITY_PATCH",
+  "VERSION.DEVICE_INITIAL_SDK_INT": "32"
+}
+EOF
+
 # Remove temporary HTML files if they exist
 find . -maxdepth 1 -name "*_HTML" -exec rm {} \;
 find . -maxdepth 1 -name "*_METADATA" -exec rm {} \;
 
-# Add fields to chiteroman.json using the migrate_chiteroman.sh script
+# Add fields to chiteroman.json
 cp pif.json chiteroman.json
+
+# Add fields to gms_certified_props.json
+cp pif2.json gms_certified_props.json
 
 # Migrate data using the migrate_osmosis.sh script and output to osmosis.json
 ./migrate_osmosis.sh -a pif.json device_osmosis.json
@@ -96,6 +115,7 @@ jq '(.spoofBuild, .spoofProvider, .spoofVendingFinger, .spoofProps) = "1" | (.sp
 
 # Delete the previously created pif.json as it's no longer needed
 rm pif.json
+rm pif2.json
 
 # Remove any backup files with the .bak extension if they exist
 find . -maxdepth 1 -name "*.bak" -exec rm {} \;
