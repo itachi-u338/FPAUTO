@@ -90,7 +90,7 @@ cat <<EOF | tee pif.json;
 {
   "MANUFACTURER": "Google",
   "MODEL": "$MODEL",
-  "FINGERPRINT": "$FINGERPRINT",
+  "FINGERPRINT": "google/$PRODUCT/$DEVICE:CANARY/$ID/$INCREMENTAL:user/release-keys",
   "PRODUCT": "$PRODUCT",
   "DEVICE": "$DEVICE",
   "SECURITY_PATCH": "$SECURITY_PATCH",
@@ -103,7 +103,7 @@ cat <<EOF | tee pif2.json;
 {
     "MANUFACTURER": "Google",
     "MODEL": "$MODEL",
-    "FINGERPRINT": "$FINGERPRINT",
+    "FINGERPRINT": "google/$PRODUCT/$DEVICE:CANARY/$ID/$INCREMENTAL:user/release-keys",
     "BRAND": "$(echo "$FINGERPRINT" | cut -d '/' -f 1)",
     "PRODUCT": "$PRODUCT",
     "DEVICE": "$DEVICE",
