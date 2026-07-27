@@ -1,12 +1,12 @@
 {
     "MANUFACTURER": "Google",
-    "MODEL": "",
+    "MODEL": "Pixel 9",
     "FINGERPRINT": "",
     "BRAND": "",
-    "PRODUCT": "",
-    "DEVICE": "",
+    "PRODUCT": "tokay_beta",
+    "DEVICE": "tokay",
     "VERSION.RELEASE": "",
     "ID": "",
-    "VERSION.SECURITY_PATCH": "",
+    "VERSION.SECURITY_PATCH": "2026-07-05",
     "VERSION.DEVICE_INITIAL_SDK_INT": "32"
 }
