@@ -1,68 +1,46 @@
 #!/bin/bash
 
-# Print a message indicating the start of the crawling process
-echo "Crawling Android Developers for latest Pixel Beta ..."
+# Get latest Pixel Beta information
+download https://developer.android.com/about/versions PIXEL_VERSIONS_HTML
+BETA_URL=$(grep -o 'https://developer.android.com/about/versions/.*[0-9]"' PIXEL_VERSIONS_HTML | sort -ru | cut -d\" -f1 | head -n1)
+download "$BETA_URL" PIXEL_LATEST_HTML
 
-wget -q -O PIXEL_VERSIONS_HTML --no-check-certificate https://developer.android.com/about/versions 2>&1 || exit 1;
-wget -q -O PIXEL_LATEST_HTML --no-check-certificate $(grep -o 'https://developer.android.com/about/versions/.*[0-9]"' PIXEL_VERSIONS_HTML | sort -ru | cut -d\" -f1 | head -n1 | tail -n1) 2>&1 || exit 1;
-wget -q -O PIXEL_OTA_HTML --no-check-certificate https://developer.android.com$(grep -o 'href=".*download-ota.*"' PIXEL_LATEST_HTML | grep 'qpr' | cut -d\" -f2 | head -n1 | tail -n1) 2>&1 || exit 1;
-echo "$(grep -m1 -oE 'tooltip>Android .*[0-9]' PIXEL_OTA_HTML | cut -d\> -f2) $(grep -oE 'tooltip>QPR.* Beta' PIXEL_OTA_HTML | cut -d\> -f2 | head -n1 | tail -n1)";
+# Get OTA information
+OTA_URL="https://developer.android.com$(grep -o 'href=".*download-ota.*"' PIXEL_LATEST_HTML | grep 'qpr' | cut -d\" -f2 | head -n1)"
+download "$OTA_URL" PIXEL_OTA_HTML
 
-if grep -q 'Release date' PIXEL_OTA_HTML; then
-  LONG_REL_DATE="$(grep -m1 -A1 'Release date' PIXEL_OTA_HTML)";
+# Extract device information
+MODEL_LIST="$(grep -A1 'tr id=' PIXEL_OTA_HTML | grep 'td' | sed 's;.*<td>\(.*\)</td>;\1;')"
+PRODUCT_LIST="$(grep -o 'tr id="[^"]*"' PIXEL_OTA_HTML | awk -F\" '{print $2 "_beta"}')"
+OTA_LIST="$(grep 'ota/.*_beta' PIXEL_OTA_HTML | cut -d\" -f2)"
+
+# List available devices
+if [ "$1" = "--list" ] || [ "$1" = "-l" ]; then
+	get_model_product_list
+fi
+
+# Select and configure device
+echo "- Selecting Pixel Beta device ..."
+if [ -z "$PRODUCT" ] || ! echo "$PRODUCT_LIST" | grep -q "$PRODUCT"; then
+	set_random_beta
+fi
+echo "$MODEL ($PRODUCT)"
+
+# Get device fingerprint and security patch from OTA metadata
+OTA_LINK="$(echo "$OTA_LIST" | grep "$PRODUCT")"
+if command -v curl > /dev/null 2>&1; then
+	curl --connect-timeout 10 -s "$OTA_LINK" | strings | head -n15 > PIXEL_ZIP_METADATA || download_fail "$OTA_LINK"
 else
-  wget -q -O PIXEL_FI_HTML --no-check-certificate https://developer.android.com$(grep -o 'href=".*download.*"' PIXEL_LATEST_HTML | grep 'qpr' | cut -d\" -f2 | head -n1 | tail -n1) 2>&1 || exit 1;
-  LONG_REL_DATE="$(grep -m1 -A1 'Release date' PIXEL_FI_HTML)";
-fi;
+	busybox wget -T 10 --no-check-certificate -qO - "$OTA_LINK" | strings | head -n15 > PIXEL_ZIP_METADATA || download_fail "$OTA_LINK"
+fi
+FINGERPRINT="$(grep -am1 'post-build=' PIXEL_ZIP_METADATA | cut -d= -f2)"
+SECURITY_PATCH="$(grep -am1 'security-patch-level=' PIXEL_ZIP_METADATA | cut -d= -f2)"
 
-BETA_REL_DATE="$(date -D '%B %e, %Y' -d "$(echo $LONG_REL_DATE | tail -n1 | sed 's;.*<td>\(.*\)</td>.*;\1;')" '+%Y-%m-%d')";
-BETA_EXP_DATE="$(date -D '%s' -d "$(($(date -D '%Y-%m-%d' -d "$BETA_REL_DATE" '+%s') + 60 * 60 * 24 * 7 * 6))" '+%Y-%m-%d')";
-echo "Beta Released: $BETA_REL_DATE \
-  \nEstimated Expiry: $BETA_EXP_DATE";
-
-MODEL_LIST="$(grep -A1 'tr id=' PIXEL_OTA_HTML | grep 'td' | sed 's;.*<td>\(.*\)</td>;\1;')";
-PRODUCT_LIST="$(grep 'tr id=' PIXEL_OTA_HTML | sed 's;.*<tr id="\(.*\)">;\1_beta;')";
-OTA_LIST="$(grep -o '>.*_beta.*</button' PIXEL_OTA_HTML | sed 's;.*>\(.*\)</button;\1;')";
-OTA_PREFIX="$(grep -m1 'ota/.*_beta' PIXEL_OTA_HTML | cut -d\" -f2 | sed 's;\(.*\)/.*;\1;')";
-
-if [ "$FORCE_MATCH" ]; then
-  DEVICE="$(getprop ro.product.device)";
-  case "$(echo ' '$PRODUCT_LIST' ')" in
-    *" ${DEVICE}_beta "*)
-      MODEL="$(getprop ro.product.model)";
-      PRODUCT="${DEVICE}_beta";
-      OTA="$OTA_PREFIX/$(echo "$OTA_LIST" | grep "$PRODUCT")";
-    ;;
-  esac;
-fi;
-item "Selecting Pixel Beta device ...";
-if [ -z "$PRODUCT" ]; then
-  set_random_beta() {
-    local list_count="$(echo "$MODEL_LIST" | wc -l)";
-    local list_rand="$((RANDOM % $list_count + 1))";
-    local IFS=$'\n';
-    set -- $MODEL_LIST;
-    MODEL="$(eval echo \${$list_rand})";
-    set -- $PRODUCT_LIST;
-    PRODUCT="$(eval echo \${$list_rand})";
-    set -- $OTA_LIST;
-    OTA="$OTA_PREFIX/$(eval echo \${$list_rand})";
-    DEVICE="$(echo "$PRODUCT" | sed 's/_beta//')";
-  }
-  set_random_beta;
-fi;
-echo "$MODEL ($PRODUCT)";
-
-(ulimit -f 2; wget -q -O PIXEL_ZIP_METADATA --no-check-certificate $OTA) 2>/dev/null;
-FINGERPRINT="$(grep -am1 'post-build=' PIXEL_ZIP_METADATA 2>/dev/null | cut -d= -f2)";
-SECURITY_PATCH="$(grep -am1 'security-patch-level=' PIXEL_ZIP_METADATA 2>/dev/null | cut -d= -f2)";
-if [ -z "$FINGERPRINT" -o -z "$SECURITY_PATCH" ]; then
-  case "$(getprop ro.product.cpu.abi)" in
-    armeabi-v7a|x86) [ "$BUSYBOX" ] && ISBB32MSG=", install wget2";;
-  esac;
-  echo "\nError: Failed to extract information from metadata$ISBB32MSG!";
-  exit 1;
-fi;
+# Validate required field to prevent empty pif.prop
+if [ -z "$FINGERPRINT" ] || [ -z "$SECURITY_PATCH" ]; then
+	# link to download pixel rom metadata
+	download_fail "https://dl.google.com"
+fi
 
 item "Dumping values to minimal pif.json ...";
 cat <<EOF | tee pif.json;
