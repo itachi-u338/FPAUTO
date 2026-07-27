@@ -1,12 +1,12 @@
 {
     "MANUFACTURER": "Google",
-    "MODEL": "Pixel 9a",
-    "FINGERPRINT": "google/tegu_beta/tegu:CANARY/ZP11.260618.005/15760424:user/release-keys",
-    "BRAND": "",
-    "PRODUCT": "tegu_beta",
-    "DEVICE": "tegu",
-    "VERSION.RELEASE": "",
-    "ID": "",
-    "VERSION.SECURITY_PATCH": "2026-07-05",
+    "MODEL": "Pixel Tablet",
+    "FINGERPRINT": "google/tangorpro_beta/tangorpro:16/CP11.251209.009.A1/14840729:user/release-keys",
+    "BRAND": "google",
+    "PRODUCT": "tangorpro_beta",
+    "DEVICE": "tangorpro",
+    "VERSION.RELEASE": "16",
+    "ID": "CP11.251209.009.A1",
+    "VERSION.SECURITY_PATCH": "2026-01-05",
     "VERSION.DEVICE_INITIAL_SDK_INT": "32"
 }
