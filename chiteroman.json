@@ -1,9 +1,9 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel 11",
-  "FINGERPRINT": "google/cubs_beta/cubs:CANARY//:user/release-keys",
-  "PRODUCT": "cubs_beta",
-  "DEVICE": "cubs",
+  "MODEL": "Pixel 11 Pro",
+  "FINGERPRINT": "google/grizzly_beta/grizzly:CANARY//:user/release-keys",
+  "PRODUCT": "grizzly_beta",
+  "DEVICE": "grizzly",
   "SECURITY_PATCH": "<a href="/docs/security/bulletin/pixel/2026/2026-08-01">August 2026</a>
     <td>Translations coming soon
 August 4, 2026
