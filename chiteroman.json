@@ -1,9 +1,9 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel 11 Pro Fold",
-  "FINGERPRINT": "google/yogi_beta/yogi:CANARY//:user/release-keys",
-  "PRODUCT": "yogi_beta",
-  "DEVICE": "yogi",
+  "MODEL": "Pixel 11",
+  "FINGERPRINT": "google/cubs_beta/cubs:CANARY//:user/release-keys",
+  "PRODUCT": "cubs_beta",
+  "DEVICE": "cubs",
   "SECURITY_PATCH": "<a href="/docs/security/bulletin/pixel/2026/2026-08-01">August 2026</a>
     <td>Translations coming soon
 August 4, 2026
