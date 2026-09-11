@@ -74,15 +74,11 @@ else
 fi;
 
 item "Crawling Pixel Update Bulletins for corresponding security patch level ...";
-CANARY_ID="$(grep '"id"' PIXEL_CANARY_JSON | sed -e 's;.*canary-\(.*\)".*;\1;' -e 's;^\(.\{4\}\);\1-;')";
-[ -z "$CANARY_ID" ] && die "Failed to extract build info from JSON";
-wget -q -T 10 -O PIXEL_SECBULL_HTML --no-check-certificate "https://source.android.com/docs/security/bulletin/pixel" 2>&1 || exit 1;
-SECURITY_PATCH="$(grep "<td>$CANARY_ID" PIXEL_SECBULL_HTML | sed 's;.*<td>\(.*\)</td>;\1;')";
+SECURITY_PATCH="$(grep -am1 'security-patch-level=' PIXEL_ZIP_METADATA | cut -d= -f2 | tr -d '\r')"
 if [ -z "$SECURITY_PATCH" ]; then
-  warn "Failed to determine exact security patch level from Pixel Update Bulletins";
-  item "Assuming probable security patch level from Canary build info ...";
-  SECURITY_PATCH="${CANARY_ID}-05";
-fi;
+  echo "Error: Failed to extract fingerprint or security patch level from metadata!"
+  exit 1
+fi
 
 item "Dumping values to minimal pif.json ...";
 cat <<EOF | tee pif.json;
