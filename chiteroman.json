@@ -1,9 +1,9 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel 10a",
-  "FINGERPRINT": "google/stallion_beta/stallion:CANARY/ZP11.260821.010/16290768:user/release-keys",
-  "PRODUCT": "stallion_beta",
-  "DEVICE": "stallion",
+  "MODEL": "Pixel 10 Pro",
+  "FINGERPRINT": "google/blazer_beta/blazer:CANARY/ZP11.260821.010/16290768:user/release-keys",
+  "PRODUCT": "blazer_beta",
+  "DEVICE": "blazer",
   "SECURITY_PATCH": "2026-09-05",
   "DEVICE_INITIAL_SDK_INT": "32"
 }
