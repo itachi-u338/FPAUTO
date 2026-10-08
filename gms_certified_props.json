@@ -1,12 +1,12 @@
 {
     "MANUFACTURER": "Google",
     "MODEL": "Pixel 9a",
-    "FINGERPRINT": "google/tegu_beta/tegu:CANARY/ZP11.260821.010/16290768:user/release-keys",
+    "FINGERPRINT": "google/tegu_beta/tegu:CANARY/ZP11.260918.007/16484274:user/release-keys",
     "BRAND": "",
     "PRODUCT": "tegu_beta",
     "DEVICE": "tegu",
     "VERSION.RELEASE": "",
     "ID": "",
-    "VERSION.SECURITY_PATCH": "2026-09-05",
+    "VERSION.SECURITY_PATCH": "2026-10-05",
     "VERSION.DEVICE_INITIAL_SDK_INT": "32"
 }
