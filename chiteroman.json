@@ -1,9 +1,9 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel 11 Pro Fold",
-  "FINGERPRINT": "google/yogi_beta/yogi:CANARY/ZP11.260918.007/16484274:user/release-keys",
-  "PRODUCT": "yogi_beta",
-  "DEVICE": "yogi",
+  "MODEL": "Pixel 10 Pro Fold",
+  "FINGERPRINT": "google/rango_beta/rango:CANARY/ZP11.260918.007/16484274:user/release-keys",
+  "PRODUCT": "rango_beta",
+  "DEVICE": "rango",
   "SECURITY_PATCH": "2026-10-05",
   "DEVICE_INITIAL_SDK_INT": "32"
 }
