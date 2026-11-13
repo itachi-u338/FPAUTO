@@ -2,7 +2,7 @@
 
 item "Crawling Android Developers for latest Pixel Beta device list ...";
 wget -q -T 10 -O PIXEL_VERSIONS_HTML --no-check-certificate "https://developer.android.com/about/versions" 2>&1 || exit 1;
-LATEST_BETA=$(grep -B4 -A2 'data-icon=\"preview' PIXEL_VERSIONS_HTML | grep -o 'href="/about/versions/.*[0-9]"' | cut -d\" -f2);
+LATEST_BETA=$(grep -B4 -A2 'data-icon="preview' PIXEL_VERSIONS_HTML | grep -o 'href="/about/versions/.*[0-9]"' | cut -d\" -f2);
 [ "$LATEST_BETA" ] || LATEST_BETA=$(grep -oE 'href="/about/versions/[0-9]{2}"' PIXEL_VERSIONS_HTML | cut -d\" -f2 | sort -ru | head -n1);
 wget -q -T 10 -O PIXEL_LATEST_HTML --no-check-certificate "https://developer.android.com$LATEST_BETA" 2>&1 || exit 1;
 wget -q -T 10 -O PIXEL_FI_HTML --no-check-certificate "https://developer.android.com$(grep -o 'href=".*download.*"' PIXEL_LATEST_HTML | grep -v 'ota' | cut -d\" -f2 | sort -ru | head -n1)" 2>&1 || exit 1;
@@ -94,6 +94,25 @@ if [ -z "$SECURITY_PATCH" ]; then
   SECURITY_PATCH="${CANARY_ID}-05";
 fi;
 echo "$SECURITY_PATCH";
+
+item "Adding corresponding first API level ...";
+case $DEVICE in
+  bluejay) DEVICE_INITIAL_SDK_INT=32;; # Pixel 6a
+  panther|cheetah) DEVICE_INITIAL_SDK_INT=33;; # Pixel 7 Series
+  lynx) DEVICE_INITIAL_SDK_INT=33;; # Pixel 7a
+  felix) DEVICE_INITIAL_SDK_INT=33;; # Pixel Fold
+  tangorpro) DEVICE_INITIAL_SDK_INT=33;; # Pixel Tablet
+  shiba|husky) DEVICE_INITIAL_SDK_INT=34;; # Pixel 8 Series
+  akita) DEVICE_INITIAL_SDK_INT=34;; # Pixel 8a
+  tokay|caiman|komodo|comet) DEVICE_INITIAL_SDK_INT=34;; # Pixel 9 Series
+  tegu) DEVICE_INITIAL_SDK_INT=35;; # Pixel 9a
+  frankel|blazer|mustang|rango) DEVICE_INITIAL_SDK_INT=36;; # Pixel 10 Series
+  stallion) DEVICE_INITIAL_SDK_INT=35;; # Pixel 10a; Actual 36
+  cubs|grizzly|kodiak|yogi) DEVICE_INITIAL_SDK_INT=37;; # Pixel 11 Series
+  *) DEVICE_INITIAL_SDK_INT=37;;
+esac;
+echo "$DEVICE_INITIAL_SDK_INT";
+[ "$DEVICE_INITIAL_SDK_INT" -gt 35 ] && warn "First API level 36 and greater may require an RKP keybox to pass";
 
 item "Dumping values to minimal pif.json ...";
 cat <<EOF | tee pif.json;
