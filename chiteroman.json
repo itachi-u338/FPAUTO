@@ -1,9 +1,9 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel Fold",
-  "FINGERPRINT": "google/felix_beta/felix:CANARY/ZP11.261016.008/16754936:user/release-keys",
-  "PRODUCT": "felix_beta",
-  "DEVICE": "felix",
+  "MODEL": "Pixel 11 Pro Fold",
+  "FINGERPRINT": "google/yogi_beta/yogi:CANARY/ZP11.261016.008/16754936:user/release-keys",
+  "PRODUCT": "yogi_beta",
+  "DEVICE": "yogi",
   "SECURITY_PATCH": "2026-11-05",
   "DEVICE_INITIAL_SDK_INT": "32"
 }
