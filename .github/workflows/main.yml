@@ -35,6 +35,7 @@ jobs:
             git add osmosis.json
             git add device_osmosis.json
             git add axionpif.json
+            git add otherpif.json
             git commit -m "Update pif.json"
             git push
           fi
