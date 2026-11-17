@@ -1,0 +1,17 @@
+{
+  "MANUFACTURER": "Google",
+  "MODEL": "Pixel 9 Pro Fold",
+  "FINGERPRINT": "google/comet_beta/comet:CANARY/ZP11.261016.008/16754936:user/release-keys",
+  "BRAND": "google",
+  "PRODUCT": "comet_beta",
+  "DEVICE": "comet",
+  "SECURITY_PATCH": "2026-11-05",
+  "spoofBuild": "true",
+  "spoofProps": "true",
+  "spoofProvider": "false",
+  "spoofSignature": "false",
+  "spoofVendingBuild": "true",
+  "spoofVendingSdk": "false",
+  "FIRST_API_LEVEL": "32",
+  "DEVICE_INITIAL_SDK_INT": 34
+}
