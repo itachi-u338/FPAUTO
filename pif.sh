@@ -143,7 +143,7 @@ cat <<EOF | tee pif2.json;
   "spoofSignature": "false",
   "spoofVendingBuild": "true",
   "spoofVendingSdk": "false",
-  "FIRST_API_LEVEL": "32",
+  "FIRST_API_LEVEL": "$DEVICE_INITIAL_SDK_INT",
   "DEVICE_INITIAL_SDK_INT": $DEVICE_INITIAL_SDK_INT
 }
 EOF
@@ -158,7 +158,7 @@ cat <<EOF | tee pif3.json;
   "PRODUCT": "$PRODUCT",
   "DEVICE": "$DEVICE",
   "SECURITY_PATCH": "$SECURITY_PATCH",
-  "FIRST_API_LEVEL": "32",
+  "FIRST_API_LEVEL": "$DEVICE_INITIAL_SDK_INT",
   "DEVICE_INITIAL_SDK_INT": $DEVICE_INITIAL_SDK_INT
 }
 EOF
