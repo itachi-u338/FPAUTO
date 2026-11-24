@@ -1,11 +1,11 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel 10",
-  "FINGERPRINT": "google/frankel_beta/frankel:CANARY/ZP11.261016.008/16754936:user/release-keys",
+  "MODEL": "Pixel 7",
+  "FINGERPRINT": "google/panther_beta/panther:CANARY/ZP11.261016.008/16754936:user/release-keys",
   "BRAND": "google",
-  "PRODUCT": "frankel_beta",
-  "DEVICE": "frankel",
+  "PRODUCT": "panther_beta",
+  "DEVICE": "panther",
   "SECURITY_PATCH": "2026-11-05",
-  "FIRST_API_LEVEL": "36",
-  "DEVICE_INITIAL_SDK_INT": 36
+  "FIRST_API_LEVEL": "33",
+  "DEVICE_INITIAL_SDK_INT": 33
 }
