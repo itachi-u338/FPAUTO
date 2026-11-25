@@ -1,11 +1,11 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel 8 Pro",
-  "FINGERPRINT": "google/husky_beta/husky:CANARY/ZP11.261016.008/16754936:user/release-keys",
+  "MODEL": "Pixel 10 Pro XL",
+  "FINGERPRINT": "google/mustang_beta/mustang:CANARY/ZP11.261016.008/16754936:user/release-keys",
   "BRAND": "google",
-  "PRODUCT": "husky_beta",
-  "DEVICE": "husky",
+  "PRODUCT": "mustang_beta",
+  "DEVICE": "mustang",
   "SECURITY_PATCH": "2026-11-05",
-  "FIRST_API_LEVEL": "34",
-  "DEVICE_INITIAL_SDK_INT": 34
+  "FIRST_API_LEVEL": "36",
+  "DEVICE_INITIAL_SDK_INT": 36
 }
