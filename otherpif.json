@@ -1,11 +1,11 @@
 {
   "MANUFACTURER": "Google",
-  "MODEL": "Pixel Fold",
-  "FINGERPRINT": "google/felix_beta/felix:CANARY/ZP11.261016.008/16754936:user/release-keys",
+  "MODEL": "Pixel 11 Pro Fold",
+  "FINGERPRINT": "google/yogi_beta/yogi:CANARY/ZP11.261016.008/16754936:user/release-keys",
   "BRAND": "google",
-  "PRODUCT": "felix_beta",
-  "DEVICE": "felix",
+  "PRODUCT": "yogi_beta",
+  "DEVICE": "yogi",
   "SECURITY_PATCH": "2026-11-05",
-  "FIRST_API_LEVEL": "33",
-  "DEVICE_INITIAL_SDK_INT": 33
+  "FIRST_API_LEVEL": "37",
+  "DEVICE_INITIAL_SDK_INT": 37
 }
